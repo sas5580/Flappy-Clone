@@ -148,7 +148,7 @@ function onpress(evt){
 	}
 }
 function main(){
-	canvas = document.createElement('canvas');
+	canvas = document.getElementById('canvas');
 
 	width = window.innerWidth;
 	height = window.innerHeight;			
@@ -169,7 +169,6 @@ function main(){
 
 	currentState = states.Splash;
 
-	document.body.appendChild(canvas);
 	var img = new Image();
 	img.onload = function(){				
 		initSprites(this);	
