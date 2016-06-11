@@ -16,7 +16,7 @@ bird = {
 	rotation: 0,
 	radius: 5,
 	gravity: 0.25,
-	_jump: 4.6,
+	_jump: 4.6,	
 
 	jump: function(){
 		this.velocity = -this._jump;			
@@ -64,7 +64,8 @@ bird = {
 }, 
 pipes = { 
 
-	_pipes: [],			
+	_pipes: [],	
+	gapsize: 80,		
 
 	reset: function(){
 		this._pipes = [];				
@@ -90,7 +91,7 @@ pipes = {
 
 				var cx = Math.min(Math.max(bird.x, p.x),p.x+p.width); //closest x						
 				var cy1 = Math.min(Math.max(bird.y,p.y),p.y+p.height); //South
-				var cy2 = Math.min(Math.max(bird.y,p.y+p.height+80),p.y+2*p.height+80); //North
+				var cy2 = Math.min(Math.max(bird.y,p.y+p.height+this.gapsize),p.y+2*p.height+this.gapsize); //North
 
 				var dx = bird.x - cx;
 				var dy1 = bird.y - cy1;
@@ -118,7 +119,7 @@ pipes = {
 		for (var i=0, len = this._pipes.length; i<len; i++){
 			var p = this._pipes[i];
 			s_pipeSouth.draw(ctx,p.x,p.y);					
-			s_pipeNorth.draw(ctx,p.x,p.y+80+p.height)
+			s_pipeNorth.draw(ctx,p.x,p.y+this.gapsize+p.height)
 		}
 	}
 };
@@ -147,7 +148,8 @@ function onpress(evt){
 			break;
 	}
 }
-function main(){
+function main(){	
+
 	canvas = document.getElementById('canvas');
 
 	width = window.innerWidth;
@@ -159,7 +161,7 @@ function main(){
 		height = 480;
 		canvas.style.border = "1px solid black";
 		evt = "mousedown"				
-	}
+	}	
 
 	canvas.addEventListener(evt, onpress);
 
@@ -208,6 +210,9 @@ function update(){
 }
 
 function render(){		
+	if (screen.width-width > 10){		
+		document.querySelector("#container").style["margin-left"] = (window.innerWidth/2-width/2-10)+"px";
+	}
 	ctx.fillStyle = s_bg.color;	
 	ctx.fillRect(0,0,width,height);
 
