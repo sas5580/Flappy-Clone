@@ -6,6 +6,7 @@ states = {
 },
 fgpos=0, 
 okbtn,
+gap_slider,
 
 bird = {
 	x:59,
@@ -171,6 +172,8 @@ function main(){
 
 	currentState = states.Splash;
 
+	gap_slider = document.getElementById('pipesize');
+
 	var img = new Image();
 	img.onload = function(){				
 		initSprites(this);	
@@ -199,13 +202,18 @@ function run(){
 
 function update(){			
 	frames++;
-	if (currentState !== states.Score){				
+	if (currentState !== states.Score){
 		fgpos = (fgpos-3)%(2*s_fg.width-width);
 	}else best = Math.max(best,score);
 
 	if (currentState === states.Game){
 		pipes.update();
 	}
+	else if (currentState === states.Splash){
+		console.log(pipes.gapsize);
+		pipes.gapsize = parseInt(gap_slider.value);
+	}
+
 	bird.update();			
 }
 
