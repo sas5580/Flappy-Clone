@@ -219,10 +219,7 @@ function update(){
 	bird.update();			
 }
 
-function render(){		
-	if (screen.width-width > 10){		
-		document.querySelector("#container").style["margin-left"] = (window.innerWidth/2-width/2-10)+"px";
-	}
+function render(){	
 	ctx.fillStyle = s_bg.color;	
 	ctx.fillRect(0,0,width,height);
 
