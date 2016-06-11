@@ -177,6 +177,9 @@ function main(){
 	var img = new Image();
 	img.onload = function(){				
 		initSprites(this);	
+		var gapimg = new Image();
+		gapimg.src = "res/gap_s.png";
+		s_text["gap"] = new Sprite(gapimg,0,0,50,60);
 
 		okbtn = {
 			x: (width-s_buttons.Ok.width)/2,
@@ -209,8 +212,7 @@ function update(){
 	if (currentState === states.Game){
 		pipes.update();
 	}
-	else if (currentState === states.Splash){
-		console.log(pipes.gapsize);
+	else if (currentState === states.Splash){		
 		pipes.gapsize = parseInt(gap_slider.value);
 	}
 
@@ -237,16 +239,19 @@ function render(){
 		s_splash.draw(ctx,width/2-s_splash.width/2,height-300);
 		var text = s_text.GetReady;
 		text.draw(ctx,width/2-text.width/2,height-380);
+		gap_slider.className = "";
+		s_text.gap.draw(ctx,width/2-30,410);
 	}			
 
-	else if (currentState === states.Score){				
+	else if (currentState === states.Score){					
 		s_text.GameOver.draw(ctx, width/2 - s_text.GameOver.width/2, height-400);
 		s_score.draw(ctx, width/2-s_score.width/2, height-340);
 		s_numberS.draw(ctx,width/2-47,height-304,score,null,10);
 		s_numberS.draw(ctx,width/2-47,height-262,best,null,10);
 
-		s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);
+		s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);		
 	} else{
+		gap_slider.className = "hide";	
 		s_numberB.draw(ctx,null,20,score,width/2,null);
 	}
 }
