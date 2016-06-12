@@ -7,7 +7,7 @@ input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
+  width: 200px;
   height: 8.4px;
   cursor: pointer;
   animate: 0.2s;
@@ -41,9 +41,4 @@ canvas{
 }
 #container #canvas, #pipesize {
   position: absolute;
-}
-
-#pipesize{
-	margin-top: 30%;
-	margin-left: 3.9%;
 }

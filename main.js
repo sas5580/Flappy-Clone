@@ -163,7 +163,7 @@ function main(){
 		canvas.style.border = "1px solid black";
 		evt = "mousedown"				
 	}	
-
+ 	
 	canvas.addEventListener(evt, onpress);
 
 	canvas.width = width;
@@ -173,6 +173,10 @@ function main(){
 	currentState = states.Splash;
 
 	gap_slider = document.getElementById('pipesize');
+	gap_slider.style['margin-top'] = (height-80)+"px";
+	gap_slider.style['margin-left'] = (width/2-100)+"px";
+
+	//width/2-30,height-65
 
 	var img = new Image();
 	img.onload = function(){				
