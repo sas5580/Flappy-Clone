@@ -41,7 +41,7 @@ function initSprites(img) {
 	s_text = {
 		FlappyBird: new Sprite(img, 59, 114, 96, 22),
 		GameOver:   new Sprite(img, 59, 136, 94, 19),
-		GetReady:   new Sprite(img, 59, 155, 87, 22)
+		GetReady:   new Sprite(img, 59, 155, 87, 22),		
 	}
 	s_buttons = {
 		Rate:  new Sprite(img,  79, 177, 40, 14),
@@ -57,6 +57,14 @@ function initSprites(img) {
 
 	s_numberS = new Sprite(img, 0, 177, 6,  7);
 	s_numberB = new Sprite(img, 0, 188, 7, 10);
+
+	s_medal = {
+		bronze:new Sprite(img,197,137,25,22),
+		silver:new Sprite(img,197,114,25,22),
+		gold:new Sprite(img,173,137,25,22),
+		diamond: new Sprite(img,173,114,25,22)
+
+	}
 
 	s_numberS.draw = s_numberB.draw = function(ctx, x, y, num,center,offset) {
 		num = num.toString();

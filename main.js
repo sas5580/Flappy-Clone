@@ -7,6 +7,7 @@ states = {
 fgpos=0, 
 okbtn,
 gap_slider,
+medal,
 
 bird = {
 	x:59,
@@ -88,7 +89,22 @@ pipes = {
 
 			if (i===0){		
 
-				score += p.x===bird.x ? 1:0;			
+				score += p.x===bird.x ? 1:0;
+				
+				switch (score){	
+					case 10: 
+						medal = "bronze";
+						break;
+					case 20: 
+						medal = "silver";
+						break;
+					case 30: 
+						medal = "gold";
+						break;
+					case 40: 
+						medal = "diamond";
+						break;
+				}				
 
 				var cx = Math.min(Math.max(bird.x, p.x),p.x+p.width); //closest x						
 				var cy1 = Math.min(Math.max(bird.y,p.y),p.y+p.height); //South
@@ -145,6 +161,7 @@ function onpress(evt){
 				pipes.reset();
 				currentState = states.Splash;						
 				score = 0;
+				medal = null;
 			}
 			break;
 	}
@@ -242,14 +259,17 @@ function render(){
 		text.draw(ctx,width/2-text.width/2,height-380);
 		gap_slider.className = "";
 		s_text.gap.draw(ctx,width/2-30,height-65);
-	}			
+	}
 
-	else if (currentState === states.Score){					
+	else if (currentState === states.Score){							
 		s_text.GameOver.draw(ctx, width/2 - s_text.GameOver.width/2, height-400);
 		s_score.draw(ctx, width/2-s_score.width/2, height-340);
 		s_numberS.draw(ctx,width/2-47,height-304,score,null,10);
-		s_numberS.draw(ctx,width/2-47,height-262,best,null,10);
-
+		s_numberS.draw(ctx,width/2-47,height-262,best,null,10);		
+		
+		if (medal){
+			s_medal[medal].draw(ctx,width/2-90,height-297);
+		}
 		s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);		
 	} else{
 		gap_slider.className = "hide";	
