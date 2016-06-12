@@ -1,5 +1,17 @@
 var canvas, ctx, width, height,
-frames = 0, score = 0, best = 0,
+frames = 0, 
+score = 0, 
+best = {
+	"40":0,
+	"50":0,
+	"60":0,
+	"70":0,
+	"80":0,
+	"90":0,
+	"100":0,
+	"110":0,
+	"120":0,
+},
 currentState, 
 states = {
 	Splash: 0, Game: 1, Score: 2
@@ -168,6 +180,13 @@ function onpress(evt){
 }
 function main(){	
 
+	if (localStorage.best){
+		best = JSON.parse(localStorage.best);
+	}
+	window.addEventListener('beforeunload',function(){
+		localStorage.best = JSON.stringify(best);
+	});
+
 	canvas = document.getElementById('canvas');
 
 	width = window.innerWidth;
@@ -228,7 +247,7 @@ function update(){
 	frames++;
 	if (currentState !== states.Score){
 		fgpos = (fgpos-3)%(2*s_fg.width-width);
-	}else best = Math.max(best,score);
+	}else best[pipes.gapsize.toString()] = Math.max(best[pipes.gapsize.toString()],score);
 
 	if (currentState === states.Game){
 		pipes.update();
@@ -265,7 +284,7 @@ function render(){
 		s_text.GameOver.draw(ctx, width/2 - s_text.GameOver.width/2, height-400);
 		s_score.draw(ctx, width/2-s_score.width/2, height-340);
 		s_numberS.draw(ctx,width/2-47,height-304,score,null,10);
-		s_numberS.draw(ctx,width/2-47,height-262,best,null,10);		
+		s_numberS.draw(ctx,width/2-47,height-262,best[pipes.gapsize.toString()],null,10);		
 		
 		if (medal){
 			s_medal[medal].draw(ctx,width/2-90,height-297);
