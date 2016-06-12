@@ -237,7 +237,7 @@ function render(){
 		var text = s_text.GetReady;
 		text.draw(ctx,width/2-text.width/2,height-380);
 		gap_slider.className = "";
-		s_text.gap.draw(ctx,width/2-30,410);
+		s_text.gap.draw(ctx,width/2-30,height-65);
 	}			
 
 	else if (currentState === states.Score){					
